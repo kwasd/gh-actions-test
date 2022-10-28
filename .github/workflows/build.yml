@@ -25,17 +25,17 @@ jobs:
     container: ghcr.io/kwasd/gh-actions-test/builder:latest
     volumes:
       - /out:/out
-  credentials:
-     username: ${{ github.actor }}
-     password: ${{ secrets.github_token }}
-  steps:
-    - name: Touch sample file
-      run: echo "$(date +%s)" > hello.txt
-    - name: List env
-      run: env
-    - name: Archive production artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: dist-without-markdown
-        path: |
-         *.txt
+    credentials:
+      username: ${{ github.actor }}
+      password: ${{ secrets.github_token }}
+    steps:
+      - name: Touch sample file
+        run: echo "$(date +%s)" > hello.txt
+      - name: List env
+        run: env
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-without-markdown
+          path: |
+            *.txt
