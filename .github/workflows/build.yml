@@ -22,9 +22,10 @@ jobs:
           tags: ghcr.io/kwasd/gh-actions-test/builder:latest
   build-package:
     runs-on: ubuntu-latest
-    container: ghcr.io/kwasd/gh-actions-test/builder:latest
-    volumes:
-      - /out:/out
+    container:
+      image: ghcr.io/kwasd/gh-actions-test/builder:latest
+      volumes:
+        - /out:/out
     credentials:
       username: ${{ github.actor }}
       password: ${{ secrets.github_token }}
