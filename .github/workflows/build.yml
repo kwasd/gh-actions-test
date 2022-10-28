@@ -1,0 +1,41 @@
+name: build
+on:
+  push:
+    branches:
+      - 'main'
+      - 'run-*'
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          file: Dockerfile.builder
+          tags: ghcr.io/kwasd/gh-actions-test/builder:latest
+  build-package:
+    runs-on: ubuntu-latest
+    container: ghcr.io/kwasd/gh-actions-test/builder:latest
+    volumes:
+      - /out:/out
+  credentials:
+     username: ${{ github.actor }}
+     password: ${{ secrets.github_token }}
+  steps:
+    - name: Touch sample file
+      run: echo "$(date +%s)" > hello.txt
+    - name: List env
+      run: env
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: dist-without-markdown
+        path: |
+         *.txt
