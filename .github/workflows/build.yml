@@ -26,9 +26,6 @@ jobs:
       image: ghcr.io/kwasd/gh-actions-test/builder:latest
       volumes:
         - /out:/out
-    credentials:
-      username: ${{ github.actor }}
-      password: ${{ secrets.github_token }}
     steps:
       - name: Touch sample file
         run: echo "$(date +%s)" > hello.txt
