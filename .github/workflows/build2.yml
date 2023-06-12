@@ -21,7 +21,6 @@ jobs:
               set -x
               if [[ -d state-${{ inputs.name }}/state ]]; then
                 mv state-${{ inputs.name }} workspace/${{ inputs.name }}
-                ls -R workspace
               else
                 echo "State not found"
               fi
@@ -30,6 +29,7 @@ jobs:
             run: |
               mkdir -p workspace/${{ inputs.name }}/state || true
               touch workspace/${{ inputs.name }}/state/`date +%s`
+              ls -R workspace
 
           - name: Upload state
             if: always()
