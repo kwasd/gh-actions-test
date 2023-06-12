@@ -36,5 +36,5 @@ jobs:
             uses: actions/upload-artifact@v3
             with:
               name: state-${{ inputs.cluster-name }}
-            path: |
-              workspace/${{ inputs.cluster-name }}/**
+              path: |
+                workspace/${{ inputs.cluster-name }}/**
