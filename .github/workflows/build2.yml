@@ -1,0 +1,40 @@
+name: Test
+on:
+  workflow_call:
+    inputs:
+      name:
+        type: string
+        required: true
+        
+jobs:
+    build-state:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Download state artifact
+            uses: actions/download-artifact@v3
+            with:
+              name: state-${{ inputs.name }}
+            continue-on-error: true
+
+          - name: Restore state
+            run: |
+              set -x
+              if [[ -d state-${{ inputs.name }}/state ]]; then
+                mv state-${{ inputs.name }} workspace/${{ inputs.name }}
+                ls -R workspace
+              else
+                echo "State not found"
+              fi
+
+          - name: Change state
+            run: |
+              mkdir -p workspace/${{ inputs.name }}/state || true
+              touch workspace/${{ inputs.name }}/state/`date +%s`
+
+          - name: Upload state
+            if: always()
+            uses: actions/upload-artifact@v3
+            with:
+              name: state-${{ inputs.cluster-name }}
+            path: |
+              workspace/${{ inputs.cluster-name }}/**
