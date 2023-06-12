@@ -35,6 +35,6 @@ jobs:
             if: always()
             uses: actions/upload-artifact@v3
             with:
-              name: state-${{ inputs.cluster-name }}
+              name: state-${{ inputs.name }}
               path: |
-                workspace/${{ inputs.cluster-name }}/**
+                workspace/${{ inputs.name }}/**
