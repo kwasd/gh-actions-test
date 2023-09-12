@@ -8,7 +8,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - name: Echo
-            run: echo "Hello world!"
+            run: echo "Hello world!" && false
           - name: Echo final
             run: echo "World finalized"
-            if: always()
+            if: always() && !inputs.skip
