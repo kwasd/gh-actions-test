@@ -1,7 +1,7 @@
 name: just-echo
 on:
     schedule:
-      - cron: '* * * * *'
+      - cron: '*/5 * * * *'
 
 jobs:
     just-echo:
