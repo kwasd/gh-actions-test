@@ -1,0 +1,14 @@
+name: just-echo
+on:
+    schedule:
+      - cron: '*/5 * * * *'
+
+jobs:
+    just-echo:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Echo
+            run: echo "Hello world!"
+          - name: Echo final
+            run: echo "World finalized"
+            if: always()
