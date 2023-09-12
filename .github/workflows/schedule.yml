@@ -11,4 +11,4 @@ jobs:
             run: echo "Hello world!" && false
           - name: Echo final
             run: echo "World finalized"
-            if: ${{ !inputs.skip && always() }}
+            if: !inputs.skip && always()
