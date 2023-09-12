@@ -1,7 +1,7 @@
 name: just-echo
 on:
     schedule:
-      - cron: '1 1 1 1 1'
+      - cron: '*/5 * * * *'
 
 jobs:
     just-echo:
@@ -11,4 +11,4 @@ jobs:
             run: echo "Hello world!" && false
           - name: Echo final
             run: echo "World finalized"
-            if: always() && !inputs.skip
+            if: !inputs.skip && always()
